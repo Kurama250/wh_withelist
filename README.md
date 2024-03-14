@@ -17,6 +17,8 @@ This code is to be put in the directory: garrysmod/addons/
 and then restart the server !
 ```
 
+![alt text](https://github.com/Kurama250/wh_withelist/blob/main/img/wh.png)
+
 Licence : [Creative commons](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en) - CC BY-NC-ND 4.0 by [Kurama250](https://github.com/Kurama250)
 
 <h1 align="center">There you go and be happy !</h1>

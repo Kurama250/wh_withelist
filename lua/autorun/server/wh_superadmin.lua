@@ -13,11 +13,26 @@ print([[
  
 ]])
 
+local whitelist = {}
+
+local function SaveWhitelist()
+    local fileData = [[
 -- WhiteList to be able to be SuperAdmin !
 local whitelist = {
     ["STEAM_ID01"] = true,
     ["STEAM_ID02"] = true,
 }
+]]
+    file.Write("wh_whitelist/whitelist.lua", fileData)
+end
+
+local function LoadWhitelist()
+    if file.Exists("wh_whitelist/whitelist.lua", "LUA") then
+        include("wh_whitelist/whitelist.lua")
+    else
+        print("Warning: whitelist file not found!")
+    end
+end
 
 local function CheckWhitelist()
     for _, ply in ipairs(player.GetAll()) do
@@ -27,7 +42,7 @@ local function CheckWhitelist()
             if ply:IsSuperAdmin() then
                 ply:StripWeapons()
                 ply:SetUserGroup("user")
-                ply:Kick("Your SteamID is not in the whitelist.")
+                ply:Kick("Your SteamID is not in the whitelist superadmin.")
             end
         end
     end
@@ -52,6 +67,14 @@ local function WhitelistThink()
 end
 
 hook.Add("Initialize", "WhitelistAddonInit", function()
+    if not file.Exists("wh_whitelist", "DATA") then
+        file.CreateDir("wh_whitelist")
+        print("The 'wh_whitelist' directory has been created.")
+        SaveWhitelist()
+    else
+        print("The 'wh_whitelist' directory already exists.")
+    end
+    LoadWhitelist()
     WhitelistThink()
     CheckAdminPromotion()
 end)

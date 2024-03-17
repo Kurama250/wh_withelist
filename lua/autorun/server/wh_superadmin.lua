@@ -13,26 +13,11 @@ print([[
  
 ]])
 
-local whitelist = {}
-
-local function SaveWhitelist()
-    local fileData = [[
 -- WhiteList to be able to be SuperAdmin !
 local whitelist = {
     ["STEAM_ID01"] = true,
     ["STEAM_ID02"] = true,
 }
-]]
-    file.Write("wh_whitelist/whitelist.lua", fileData)
-end
-
-local function LoadWhitelist()
-    if file.Exists("wh_whitelist/whitelist.lua", "LUA") then
-        include("wh_whitelist/whitelist.lua")
-    else
-        print("Warning: whitelist file not found!")
-    end
-end
 
 local function CheckWhitelist()
     for _, ply in ipairs(player.GetAll()) do
@@ -42,7 +27,7 @@ local function CheckWhitelist()
             if ply:IsSuperAdmin() then
                 ply:StripWeapons()
                 ply:SetUserGroup("user")
-                ply:Kick("Your SteamID is not in the whitelist superadmin.")
+                ply:Kick("[Addons Kurama WH] Your SteamID is not in the whitelist superadmin.")
             end
         end
     end
@@ -52,9 +37,9 @@ local function CheckAdminPromotion()
     hook.Add("PlayerPromote", "CheckAdminPromotion", function(ply, target, newRank)
         if newRank == "superadmin" then
             if not whitelist[target:SteamID()] then
-                ply:Ban(0, "You promoted a player who is not on the whitelist.")
+                ply:Ban(0, "[Addons Kurama WH] You promoted a player who is not on the whitelist.")
                 target:SetUserGroup("user")
-                target:Kick("You have been demoted because your SteamID is not in the whitelist.")
+                target:Kick("[Addons Kurama WH] You have been demoted because your SteamID is not in the whitelist.")
             end
         end
     end)
@@ -67,14 +52,6 @@ local function WhitelistThink()
 end
 
 hook.Add("Initialize", "WhitelistAddonInit", function()
-    if not file.Exists("wh_whitelist", "DATA") then
-        file.CreateDir("wh_whitelist")
-        print("[Addons Kurama WH] The 'wh_whitelist' directory has been created.")
-        SaveWhitelist()
-    else
-        print("[Addons Kurama WH] The 'wh_whitelist' directory already exists.")
-    end
-    LoadWhitelist()
     WhitelistThink()
     CheckAdminPromotion()
 end)

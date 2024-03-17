@@ -69,10 +69,10 @@ end
 hook.Add("Initialize", "WhitelistAddonInit", function()
     if not file.Exists("wh_whitelist", "DATA") then
         file.CreateDir("wh_whitelist")
-        print("The 'wh_whitelist' directory has been created.")
+        print("[Addons Kurama WH] The 'wh_whitelist' directory has been created.")
         SaveWhitelist()
     else
-        print("The 'wh_whitelist' directory already exists.")
+        print("[Addons Kurama WH] The 'wh_whitelist' directory already exists.")
     end
     LoadWhitelist()
     WhitelistThink()

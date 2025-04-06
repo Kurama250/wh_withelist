@@ -21,5 +21,6 @@ and then restart the server !
 
 Licence : [Creative commons](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en) - CC BY-NC-ND 4.0 by [Kurama250](https://github.com/Kurama250)
 
+<h3 align="center"><strong>Support on Discord :</strong> <a href="https://discord.gg/6aebQGdDxB">Discord</a></3>
 <h3 align="center">If you like this repository don't hesitate to give it a star ⭐ !</h3>
 <h1 align="center">There you go and be happy !</h1>
